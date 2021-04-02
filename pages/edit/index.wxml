@@ -1,0 +1,12 @@
+<!--pages/edit/index.wxml-->
+<view class="col-form">
+  <van-cell-group>
+    <van-field label="标题" value="{{ form.title }}" clearable icon="column" placeholder="请输入标题" border="{{ false }}" bind:change="onChange" />
+  </van-cell-group>
+  <van-cell-group>
+    <van-field label="天数" value="{{ form.title }}" clearable icon="column" placeholder="请输入天数" border="{{ false }}" bind:change="onChange" />
+  </van-cell-group>
+  <van-cell-group>
+    <van-field label="激励" value="{{ form.title }}" clearable icon="column" placeholder="请输入激励话语" border="{{ false }}" bind:change="onChange" />
+  </van-cell-group>
+</view>

@@ -1,0 +1,5 @@
+<!--pages/login/index.wxml-->
+<view class="box">
+  <text>点击下方按钮，即可开启自律的生活</text>
+  <button class="round md" type="primary"  open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取授权</button>
+</view>

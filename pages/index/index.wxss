@@ -1,0 +1,107 @@
+.top-int{
+  width: 100%;
+  height: 100rpx;
+  /* background-color: #eeebeb; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.round-int{
+  width: 45%;
+  height: 85rpx;
+  background-color: #4E10AE;
+  color: #fff;
+  text-align: center;
+  font-size: 26rpx;
+  line-height: 85rpx;
+  border-radius: 45rpx;
+}
+.content{
+  width: 100%;
+  height: 92vh;
+  padding-bottom: 15rpx;
+  /* background-color: #d8d8d8; */
+  box-sizing: border-box;
+}
+/* 卡片sty */
+.si-card{
+  width: 100%;
+  height: 260rpx;
+  background-color: #faf8fc;
+  margin: 30rpx auto;
+  /* border-radius: 30rpx; */
+  border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
+  /* box-shadow: 0 0 3px #d8d8d8; */
+  display: flex;
+}
+/* 左边 */
+.lef-box{
+  width: 85%;
+  height: 100%;
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-sty{
+  width: 250rpx;
+  height: 95%;
+  background-color: white;
+}
+.tit-int,.tit-md,.tit-sm{ margin: 8rpx;}
+.tit-int{
+  font-weight: 500;
+  font-size: 36rpx;
+}
+.tit-md{
+  font-size: 28rpx;
+  color: #002
+}
+.tit-sm{
+  font-size: 22rpx;
+  color: #002
+}
+/* 右边 */
+.rig-box{
+  width: 15%;
+  height: 100%;
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col-box{
+  width: 310rpx;
+  height: 100%;
+  /* background-color: tomato; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.add-btn{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-color: #4E10AE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 30rpx;
+  right: 30rpx;
+  z-index: 90;
+}
+
+/* 移除 */
+.del-sty{
+  background-color: #7868e6;
+  width: 145rpx;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 260rpx;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
+  font-size: 36rpx;
+}

@@ -1,0 +1,25 @@
+<!--pages/history/index.wxml-->
+<!--  日历 -->
+<van-transition show="{{!isPull}}" name="slide-down" custom-class="calendar">
+  <van-calendar show-title="{{false}}" color="#5C0DAC" poppable="{{ false }}" show-confirm="{{ false }}" />
+</van-transition>
+<!-- 中间件 -->
+<view class="int-box">
+  <van-transition show="{{!isPull}}" name="slide-up" custom-class="block">
+    <van-icon wx:if="{{!isPull}}" bindtap="handlerPullUp" color="#d8d8d8" name="arrow-up" size="36px" />
+  </van-transition>
+</view>
+<van-transition duration="{{ { enter: 300, leave: 1000 } }}" show="{{isPull}}" name="slide-up">
+  <scroll-view class="content" scroll-y="true">
+    <view class="int-box">
+      <van-icon wx:if="{{isPull}}" bindtap="handlerPullDown" color="#d8d8d8" name="arrow-down" size="36px" />
+    </view>
+    <van-transition duration="{{ { enter: 600, leave: 1000 } }}" show="{{isPull}}" name="slide-up">
+      <view wx:for="{{todoList}}" wx:for-item="{{item}}" wx:for-index="{{index}}" wx:key="{{index}}" style="width:95%;height:200rpx;background: purple;margin:15rpx auto">
+        <view>习惯:{{item.title}}</view>
+        <view>激励语:{{item.msg}}</view>
+        <view>预计天数:{{item.day}}</view>
+      </view>
+    </van-transition>
+  </scroll-view>
+</van-transition>

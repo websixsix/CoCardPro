@@ -1,0 +1,40 @@
+<wxs  module="tool" src="../../tool-wx/common.wxs"></wxs>
+<!-- 头部日期点击 -->
+<view class="top-int">
+  <view class="round-int" bindtap="handlerDatePicker">当前:{{selectDate}}</view>
+</view>
+<!-- 内容区域 -->
+<scroll-view class="content" scroll-y="true">
+  <!-- 悬浮按钮 添加 -->
+  <view class="add-btn" bindtap="handlerGoEdit">
+    <van-icon name="plus" size="25px" color="#fff" />
+  </view>
+  <!-- 单个内容卡片 -->
+  <van-swipe-cell wx:if="{{todoList.length}}" right-width="{{ 65 }}"  wx:for="{{todoList}}" wx:for-item="todo" wx:for-index="index" wx:key="index">
+        <view class="si-card">
+          <view class="lef-box">
+          <image class="img-sty"></image>
+          <view class="col-box">
+              <text class="tit-int">{{todo.title}}</text>
+              <text class="tit-md">{{todo.msg}}</text>
+              <text class="tit-sm">打卡累计： {{todo.count}}次</text>
+          </view>
+        </view>
+        <view class="rig-box">
+          <van-checkbox value="{{tool.computedDateState(todoList,todo.idFlag)}}" bind:change="handlerDo" data-id="{{todo.idFlag}}" data-rel="{{todo.rel_id}}" data-date="{{todo.date}}"/>
+        </view>
+        </view>
+        <view slot='right' class="del-sty" bindtap="handlerDeCur" data-id="{{todo.rel_id}}" data-index="{{index}}">删除</view>
+    </van-swipe-cell>
+    <!-- 空状态 -->
+    <van-empty  wx:if="{{!todoList.length}}" description="什么都没有呢，快去添加一个习惯吧" />
+</scroll-view>
+<!-- 时间选中弹窗 -->
+<van-popup round show="{{ show }}" position="top" custom-style="height: auto;" bind:close="handlerDateClose">
+  <van-datetime-picker type="date" value="{{ currentDate }}" min-date="{{ minDate }}" formatter="{{ formatter }}"
+    bind:cancel="handlerDateClose" bind:confirm="onGetSelect" />
+</van-popup>
+<!--点击添加 弹窗 -->
+<van-popup show="{{ editForm }}" position="bottom" custom-style="height: 75%;" bind:close="handlerClose" round>
+  <co-edit id="editForm" bind:onCreate="handlerAdd" bind:onCancel="handlerCancel" />
+</van-popup>

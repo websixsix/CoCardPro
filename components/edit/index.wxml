@@ -1,0 +1,24 @@
+<!--components/edit/index.wxml-->
+<view class="col-form">
+  <van-cell-group>
+    <van-field label="标题" value="{{ form.title }}" required clearable icon="column" placeholder="请输入标题" border="{{ false }}"
+      bind:change="onChangeTitle" />
+  </van-cell-group>
+  <van-cell-group>
+    <van-field label="天数" type="number" required value="{{ form.day }}" clearable icon="underway" placeholder="请输入天数" border="{{ false }}"
+      bind:change="onChangeDay" />
+  </van-cell-group>
+  <van-cell-group>
+    <van-field label="激励" value="{{ form.msg }}" required clearable icon="smile-comment" placeholder="请输入激励话语"
+      border="{{ false }}" bind:change="onChangeMsg" />
+  </van-cell-group>
+  <van-cell-group >
+    <van-field label="时间" value="{{form.date}}" required></van-field>
+    <van-datetime-picker type="datetime" value="{{ curDate }}" visible-item-count='3' bind:input="onInput" min-date="{{ minDate }}"
+      formatter="{{ formatter }}" show-toolbar="{{false}}" />
+  </van-cell-group>
+  <view class="btn-area">
+    <van-button size="normal" round color="#7232dd" bindtap="handlerCreate">创建</van-button>
+    <van-button size="normal" round type='default' bindtap="handlerCancel">取消</van-button>
+  </view>
+</view>
