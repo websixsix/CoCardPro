@@ -1,27 +1,35 @@
 <!--logs.wxml-->
 <!-- 头像 微信授权 -->
 <view class="def-box">
-  <image class="def-sty" src="{{icon}}"></image>
-  <text  class="over-init">{{name}}</text>
-</view>
-<!-- 坚持天数 -->
-<view class="col-box">
-  <text>{{longTime}}天</text>
-  <text>当前已坚持</text>
+  <view class="def-row bottom-line">
+    <image class="def-sty" src="{{icon}}"></image>
+    <text  class="over-init">{{name}}</text>
+  </view>
+  <view class="def-row">
+    <view class="left-box">
+      <text class="box-text">{{finishNum}}</text>
+      <text class="box-text">当前天数</text>
+    </view>
+    <view class="right-box">
+      <text class="box-text">{{longTime-1}}</text>
+      <text class="box-text">已有习惯</text>
+    </view>
+  </view>
 </view>
 <!-- 展示习惯信息 -->
-<view class="def-box" style="background: none; justify-content: space-between">
+<view class="small-tip">连续坚持打卡：</view>
+<view class="def-box" style="height: 150rpx; justify-content: space-between">
   <view class="left-box">
-    <text>{{finishNum}}个</text>
-    <text>完成习惯个数</text>
+    <text class="box-text">{{finishNum}}</text>
+    <text class="box-text">当前天数</text>
   </view>
   <view class="right-box">
-    <text>{{longTime-1}}天</text>
-    <text>最长坚持天数</text>
+    <text class="box-text">{{longTime-1}}</text>
+    <text class="box-text">最长天数</text>
   </view>
 </view>
 <!-- 我的习惯 -->
 <view class="btn-view" bindtap="handlerGo">
-  <view>我的习惯个数{{todoList.length}}</view>
+  <view>我的习惯（{{todoList.length}}）</view>
   <van-icon name="arrow" size='22px'/>
 </view>

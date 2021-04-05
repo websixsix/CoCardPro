@@ -1,5 +1,6 @@
 <!--pages/login/index.wxml-->
 <view class="box">
-  <text>点击下方按钮，即可开启自律的生活</text>
-  <button class="round md" type="primary"  open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取授权</button>
+  <image></image>
+  <text>登录后才可查看数据哦</text>
+  <button class="round md" type="primary" bindtap="getUserInfo">点击登录</button>
 </view>

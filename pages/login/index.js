@@ -27,7 +27,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("全局",app.globalData.userInfo)
+
   },
 
   /**
@@ -66,23 +66,50 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 授权
+  // 授权&登录
   getUserInfo(res){
-      console.log("授权信息",res.detail.errMsg);
-      if(res.detail.errMsg === "getUserInfo:ok")
-      {
-      wx.setStorage({
-        key:"user",
-        data: res.detail.rawData,
-        success: result => {
-          wx.reLaunch({
-            url: '/pages/logs/logs',
-          })
-        }
+    // 登录
+    if (!wx.cloud) {
+      wx.showToast({
+        title: 'openID获取失败',
+        icon: 'none',
+        duration: 2000
       })
+      return
     }
-    else wx.navigateTo({
-      url: '/pages/login/index',
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        app.globalData.openid = res.result.userInfo.openId
+        wx.showToast({
+          title: 'openID获取成功',
+          icon: 'success',
+          duration: 2000
+        })
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        app.globalData.userInfo = res.userInfo
+        app.globalData.hasUserInfo = true
+
+        wx.reLaunch({
+          url: '/pages/edit/index',
+        })
+      },
+      fail: (err) => {
+        console.log(err)
+        wx.navigateTo({
+          url: '/pages/login/index',
+        })
+      }
     })
   }
 })

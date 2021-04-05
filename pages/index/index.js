@@ -33,18 +33,13 @@ Page({
     })
   },
   onLoad() {
-    
-
     utils.computedDate('2021-03-16',3)
     // 初始化时间
     let selectDate = utils.checkDate(1,this.data.currentDate);
     this.setData({
       selectDate
     });
-    wx.showLoading({
-      title: '加载中',
-    })
-    this.fetchList()
+    // this.fetchList()
   },
   // 选择时间弹窗
   handlerDatePicker(){
@@ -74,11 +69,11 @@ Page({
   },
   // 去编辑
   handlerGoEdit(){
-    // wx.navigateTo({
-    //   url: "/pages/edit/index",
-    // })
-    this.setData({editForm: true});
-    this.selectComponent('#editForm').initForm();
+    wx.navigateTo({
+      url: "/pages/edit/index",
+    })
+    // this.setData({editForm: true});
+    // this.selectComponent('#editForm').initForm();
 
   },
   // 勾选当前任务

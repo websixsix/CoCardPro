@@ -6,6 +6,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     wx.cloud.init() 
+    //获取设定判断是否有授权
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.userInfo']) {
@@ -15,14 +16,10 @@ App({
         }
       }
     })
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
   },
   globalData: {
-    userInfo: {}
+    openid:"",
+    userInfo: {},
+    hasUserInfo: false
   }
 })

@@ -1,7 +1,15 @@
 <!--pages/history/index.wxml-->
 <!--  日历 -->
 <van-transition show="{{!isPull}}" name="slide-down" custom-class="calendar">
-  <van-calendar show-title="{{false}}" color="#5C0DAC" poppable="{{ false }}" show-confirm="{{ false }}" />
+  <van-calendar type="single" 
+                show-title="{{false}}" 
+                min-date="{{ minDate }}" 
+                max-date="{{ maxDate }}" 
+                color="#5C0DAC" 
+                poppable="{{ false }}" 
+                show-confirm="{{ false }}" 
+                formatter="{{dateFormatter}}" 
+                bind:select="onSelect"/>
 </van-transition>
 <!-- 中间件 -->
 <view class="int-box">

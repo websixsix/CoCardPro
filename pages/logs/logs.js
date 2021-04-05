@@ -13,21 +13,23 @@ Page({
     name: ''
   },
   onLoad() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    this.fetchList();
-    let that = this;
-    wx.getStorage({
-      key: 'user',
-      success: res => {
-        console.log("用户信息",JSON.parse(res.data))
-        that.setData({
-          name: JSON.parse(res.data).nickName,
-          icon: JSON.parse(res.data).avatarUrl
-        })
-      }
-    })
+    console.log("全局",app.globalData);
+    this.setData({
+      name : app.globalData.userInfo.nickName,
+      icon : app.globalData.userInfo.avatarUrl
+    });
+    // this.fetchList();
+    // let that = this;
+    // wx.getStorage({
+    //   key: 'user',
+    //   success: res => {
+    //     console.log("用户信息",JSON.parse(res.data))
+    //     that.setData({
+    //       name: JSON.parse(res.data).nickName,
+    //       icon: JSON.parse(res.data).avatarUrl
+    //     })
+    //   }
+    // })
   },
     // 拉取 创建数据
     fetchList(){

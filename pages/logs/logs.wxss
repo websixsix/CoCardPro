@@ -8,21 +8,48 @@
 }
 .def-box,.col-box{
   width: 95%;
-  height: 300rpx;
+  height: 400rpx;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 15rpx;
   margin-top: 30rpx;
 }
+
+.def-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.bottom-line{
+  border-bottom: 2rpx solid black;
+}
+
 .def-sty{
+  float: left;
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
   background-color: yellow;
+  margin-left: 5%;
 }
+
+.over-init{
+  float: left;
+  margin-left:30rpx;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 400rpx;
+  height: 100%;
+  line-height: 200rpx;
+  font-weight: bolder;
+}
+
 .col-box{
   height: 200rpx;
   flex-direction: column;
@@ -48,10 +75,15 @@
   margin: 30rpx auto;
 }
 
-.over-init{
-  margin-left:30rpx;
-  text-overflow: ellipsis;
-  display: inline-block;
-  height: auto;
-  width: 400rpx;
+.small-tip{
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  font-weight: bold;
+}
+
+.box-text{
+  height : 70rpx;
+  line-height: 70rpx;
+  text-align: center;
 }

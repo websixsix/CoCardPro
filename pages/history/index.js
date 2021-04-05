@@ -1,6 +1,7 @@
 // pages/history/index.js
-const db = wx.cloud.database("cloud1");
+const db = wx.cloud.database("cloud1")
 const todo = db.collection("taskList")
+const app = getApp()
 Page({
 
   /**
@@ -10,7 +11,24 @@ Page({
     isPull: false,
     start:0,
     end:0,
-    todoList: []
+    todoList: [],
+    minDate: new Date().getTime(),
+    maxDate: new Date().getTime(),
+    formatTime: 0,
+    dateFormatter(day){
+      if(!app.globalData.formatTime){
+        app.globalData.formatTime = 0
+      }
+
+      if(app.globalData.formatTime <= 180){
+        console.log("fff")
+        if(true){
+          day.bottomInfo = "未打卡";
+        }
+        app.globalData.formatTime += 1
+      }
+      return day;
+    },
   },
 
   /**
@@ -24,6 +42,16 @@ Page({
           todoList: res.data
         })
       }
+    })
+
+    //获取当前日期取前后一个月的时间
+    var now = new Date()
+    console.log(now)
+    var min_Day = new Date()
+    min_Day.setDate(now.getDate() - 180)
+    this.setData({
+      minDate: min_Day.getTime(),
+      dateFormatter: this.customFormat
     })
   },
 
@@ -82,5 +110,16 @@ Page({
   // 滚动 下
   handlerPullDown(){
     this.setData({isPull: false})
-  }
+  },
+
+  onSelect(event) {
+    //获取点击到的时间节点---进行比较
+    var selectDate = new Date(event.detail)
+    console.log(selectDate)
+    wx.showToast({
+      title: '你该日期还未打卡，加油吧',
+      icon: 'none',
+      duration: 2000
+    })
+  },
 })

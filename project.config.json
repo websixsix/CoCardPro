@@ -59,6 +59,7 @@
   "isGameTourist": false,
   "cloudfunctionRoot": "cloudbase/",
   "cloudbaseRoot": "cloudbase/",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []

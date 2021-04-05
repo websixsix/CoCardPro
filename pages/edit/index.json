@@ -7,6 +7,12 @@
      "van-popup": "@vant/weapp/popup/index",
      "van-icon": "@vant/weapp/icon/index",
      "van-field": "@vant/weapp/field/index",
-     "van-cell-group": "@vant/weapp/cell-group/index"
+     "van-cell-group": "@vant/weapp/cell-group/index",
+     "van-calendar": "@vant/weapp/calendar/index",
+     "van-cell": "@vant/weapp/cell/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-switch": "@vant/weapp/switch/index"
   }
 }
