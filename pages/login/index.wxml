@@ -1,6 +1,6 @@
 <!--pages/login/index.wxml-->
 <view class="box">
-  <image></image>
+  <image src="cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Image/SignIn.png"></image>
   <text>登录后才可查看数据哦</text>
   <button class="round md" type="primary" bindtap="getUserInfo">点击登录</button>
 </view>

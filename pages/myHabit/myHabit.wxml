@@ -1,0 +1,34 @@
+<!--pages/myHabit/myHabit.wxml-->
+<view>
+  <van-tabs bind:click="onClick">
+    <van-tab title="未完成">
+      <van-swipe-cell wx:if="{{todoList.length}}" right-width="{{ 65 }}"  wx:for="{{todoList}}" wx:for-item="todo" wx:for-index="index" wx:key="index">
+        <view class="si-card">
+          <view class="lef-box">
+            <image class="img-sty" src="{{todo.picName}}"></image>
+            <view class="col-box">
+              <text class="tit-int">{{todo.title}}</text>
+              <text class="tit-md">{{todo.msg}}</text>
+              <text class="tit-sm">打卡累计： {{todo.count}}次</text>
+            </view>
+          </view>
+        </view>
+      </van-swipe-cell>
+    </van-tab>
+    <van-tab title="已完成">
+      <van-swipe-cell wx:if="{{doneList.length}}" right-width="{{ 65 }}"  wx:for="{{doneList}}" wx:for-item="done" wx:for-index="index" wx:key="index">
+        <view class="si-card">
+          <view class="lef-box">
+            <image class="img-sty" src="{{done.picName}}"></image>
+            <view class="col-box">
+              <text class="tit-int">{{done.title}}</text>
+              <text class="tit-md">{{done.msg}}</text>
+              <text class="tit-sm">打卡累计： {{done.count}}次</text>
+              <text class="tit-sm">完成日期： {{done.doneDate}}</text>
+            </view>
+          </view>
+        </view>
+      </van-swipe-cell>
+    </van-tab>
+  </van-tabs>
+</view>

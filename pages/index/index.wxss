@@ -53,10 +53,12 @@
 .tit-int{
   font-weight: 500;
   font-size: 36rpx;
+  font-weight: bolder;
 }
 .tit-md{
   font-size: 28rpx;
-  color: #002
+  color: #002;
+  font-weight: lighter;
 }
 .tit-sm{
   font-size: 22rpx;

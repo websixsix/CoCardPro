@@ -76,7 +76,7 @@ Page({
     // 跳转我的记录
     handlerGo(){
       wx.reLaunch({
-        url: '/pages/history/index',
+        url: '/pages/myHabit/myHabit',
       })
     }
 })

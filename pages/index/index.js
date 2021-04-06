@@ -23,7 +23,26 @@ Page({
     },
     checked: false,
     editForm: false,
-    todoList: [],
+    todoList: [
+      {
+        title: '我的第一个打卡',
+        day: 5,
+        msg: '我的第一个打卡要加油啊',
+        date: '2021-04-06 09:54',
+        count: 5,
+        rel_id: '8bb3-1617069314136-83909',
+        picName: app.globalData.picRootPath + 'Call.svg'
+      },
+      {
+        title: '我的第二个打卡',
+        day: 3,
+        msg: '我的第二个打卡要加油啊',
+        date: '2021-04-06 09:54',
+        count: 2,
+        rel_id: '2678-1617073331348-02625',
+        picName: app.globalData.picRootPath +'CutWeight.svg'
+      }
+    ],
     nowDate: utils.getNowTime()
   },
   // 事件处理函数

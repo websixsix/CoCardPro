@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/edit/index",
     "pages/history/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/myHabit/myHabit"
   ],
   "window": {
     "backgroundTextStyle": "light",

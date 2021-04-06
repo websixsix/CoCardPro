@@ -1,3 +1,5 @@
+const app = getApp()
+
 // pages/edit/index.js
 Page({
 
@@ -26,8 +28,10 @@ Page({
       { text: '看书', value: 'LookBook' },
       { text: '打电话', value: 'Call' },
       { text: '减肥', value: 'CutWeight' },
+      { text: '画画', value: 'Painting' },
+      { text: '健身', value: 'Sport' },
+      { text: '吃蔬菜', value: 'Vegetable' },
     ],
-    picRootPath:'cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Icon/',
     showPicPath:'cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Icon/LookBook.svg'
   },
 
@@ -166,7 +170,7 @@ Page({
   onPicChange({ detail }){
     var fakeForm = this.data.form;
     fakeForm.picture = detail;
-    var newPath = this.data.picRootPath + detail + '.svg';
+    var newPath = app.globalData.picRootPath + detail + '.svg';
     this.setData({
       form:fakeForm,
       showPicPath: newPath

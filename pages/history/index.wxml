@@ -22,12 +22,20 @@
     <view class="int-box">
       <van-icon wx:if="{{isPull}}" bindtap="handlerPullDown" color="#d8d8d8" name="arrow-down" size="36px" />
     </view>
-    <van-transition duration="{{ { enter: 600, leave: 1000 } }}" show="{{isPull}}" name="slide-up">
-      <view wx:for="{{todoList}}" wx:for-item="{{item}}" wx:for-index="{{index}}" wx:key="{{index}}" style="width:95%;height:200rpx;background: purple;margin:15rpx auto">
-        <view>习惯:{{item.title}}</view>
-        <view>激励语:{{item.msg}}</view>
-        <view>预计天数:{{item.day}}</view>
+    <!-- <van-transition duration="{{ { enter: 600, leave: 1000 } }}" show="{{isPull}}" name="slide-up"> -->
+      <view wx:for="{{todoList}}" wx:for-item="todo" wx:for-index="index" wx:key="index">
+        <view class="si-card">
+          <view class="lef-box">
+            <image class="img-sty" src="{{todo.picName}}"></image>
+            <view class="col-box">
+              <text class="tit-int">{{todo.title}}</text>
+              <text class="tit-md">{{todo.msg}}</text>
+              <text class="tit-sm">至今打卡累计： {{todo.count}}次</text>
+              <text class="tit-sm">今日打卡时间： {{todo.date}}</text>
+            </view>
+          </view>
+        </view>
       </view>
-    </van-transition>
+    <!-- </van-transition> -->
   </scroll-view>
 </van-transition>

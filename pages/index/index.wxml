@@ -11,21 +11,21 @@
   </view>
   <!-- 单个内容卡片 -->
   <van-swipe-cell wx:if="{{todoList.length}}" right-width="{{ 65 }}"  wx:for="{{todoList}}" wx:for-item="todo" wx:for-index="index" wx:key="index">
-        <view class="si-card">
-          <view class="lef-box">
-          <image class="img-sty"></image>
-          <view class="col-box">
-              <text class="tit-int">{{todo.title}}</text>
-              <text class="tit-md">{{todo.msg}}</text>
-              <text class="tit-sm">打卡累计： {{todo.count}}次</text>
-          </view>
+    <view class="si-card">
+      <view class="lef-box">
+        <image class="img-sty" src="{{todo.picName}}"></image>
+        <view class="col-box">
+          <text class="tit-int">{{todo.title}}</text>
+          <text class="tit-md">{{todo.msg}}</text>
+          <text class="tit-sm">打卡累计： {{todo.count}}次</text>
         </view>
-        <view class="rig-box">
-          <van-checkbox value="{{tool.computedDateState(todoList,todo.idFlag)}}" bind:change="handlerDo" data-id="{{todo.idFlag}}" data-rel="{{todo.rel_id}}" data-date="{{todo.date}}"/>
-        </view>
-        </view>
-        <view slot='right' class="del-sty" bindtap="handlerDeCur" data-id="{{todo.rel_id}}" data-index="{{index}}">删除</view>
-    </van-swipe-cell>
+      </view>
+      <view class="rig-box">
+        <van-checkbox value="{{tool.computedDateState(todoList,todo.idFlag)}}" bind:change="handlerDo" data-id="{{todo.idFlag}}" data-rel="{{todo.rel_id}}" data-date="{{todo.date}}"/>
+      </view>
+    </view>
+    <view slot='right' class="del-sty" bindtap="handlerDeCur" data-id="{{todo.rel_id}}" data-index="{{index}}">删除</view>
+  </van-swipe-cell>
     <!-- 空状态 -->
     <van-empty  wx:if="{{!todoList.length}}" description="什么都没有呢，快去添加一个习惯吧" />
 </scroll-view>

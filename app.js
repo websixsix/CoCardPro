@@ -20,6 +20,7 @@ App({
   globalData: {
     openid:"",
     userInfo: {},
-    hasUserInfo: false
+    hasUserInfo: false,
+    picRootPath:'cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Icon/',
   }
 })

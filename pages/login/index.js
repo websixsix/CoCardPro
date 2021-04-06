@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isSucceed: false
   },
 
   /**
@@ -68,6 +68,8 @@ Page({
   },
   // 授权&登录
   getUserInfo(res){
+    if(this.data.isSucceed) return;
+
     // 登录
     if (!wx.cloud) {
       wx.showToast({
@@ -82,11 +84,6 @@ Page({
       data: {},
       success: res => {
         app.globalData.openid = res.result.userInfo.openId
-        wx.showToast({
-          title: 'openID获取成功',
-          icon: 'success',
-          duration: 2000
-        })
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
@@ -100,8 +97,20 @@ Page({
         app.globalData.userInfo = res.userInfo
         app.globalData.hasUserInfo = true
 
-        wx.reLaunch({
-          url: '/pages/edit/index',
+        this.setData({
+          isSucceed:true
+        })
+        wx.showToast({
+          title: '登录成功',
+          icon: 'success',
+          duration: 2000,
+          complete: ()=>{
+            setTimeout(() => {
+              wx.reLaunch({
+                url: '/pages/history/index',
+              })
+            }, 2000);
+          }
         })
       },
       fail: (err) => {
