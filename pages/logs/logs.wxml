@@ -29,7 +29,7 @@
   </view>
 </view>
 <!-- 我的习惯 -->
-<view class="btn-view" bindtap="handlerGo">
-  <view>我的习惯（{{todoList.length}}）</view>
+<view class="def-box" style="height: 150rpx; justify-content: center; text-items:center">
+  <view style="height: 150rpx; line-height:150rpx">我的习惯（{{todoList.length}}）</view>
   <van-icon name="arrow" size='22px'/>
 </view>

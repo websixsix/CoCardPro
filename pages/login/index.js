@@ -107,7 +107,7 @@ Page({
           complete: ()=>{
             setTimeout(() => {
               wx.reLaunch({
-                url: '/pages/history/index',
+                url: '/pages/logs/logs',
               })
             }, 2000);
           }
