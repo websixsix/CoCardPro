@@ -69,26 +69,17 @@ Page({
   // 授权&登录
   getUserInfo(res){
     if(this.data.isSucceed) return;
-
     // 登录
     if (!wx.cloud) {
+      //云服务端出现问题
       wx.showToast({
-        title: 'openID获取失败',
+        title: '网络错误，登录失败',
         icon: 'none',
         duration: 2000
       })
       return
     }
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        app.globalData.openid = res.result.userInfo.openId
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-      }
-    })
+
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
     // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -100,22 +91,34 @@ Page({
         this.setData({
           isSucceed:true
         })
-        wx.showToast({
-          title: '登录成功',
-          icon: 'success',
-          duration: 2000,
-          complete: ()=>{
-            setTimeout(() => {
-              wx.reLaunch({
-                url: '/pages/logs/logs',
-              })
-            }, 2000);
+        
+        wx.cloud.callFunction({
+          name: 'login',
+          data: {},
+          success: res => {
+            app.globalData.openId = res.result.openId
+            // console.log(res,app.globalData.openId)
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success',
+              duration: 2000,
+              complete: ()=>{
+                setTimeout(() => {
+                  wx.reLaunch({
+                    url: '/pages/logs/logs',
+                  })
+                }, 2000);
+              }
+            })
+          },
+          fail: err => {
+            console.error('[云函数] [login] 调用失败', err)
           }
         })
       },
       fail: (err) => {
         console.log(err)
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/login/index',
         })
       }

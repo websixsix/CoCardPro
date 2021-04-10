@@ -30,8 +30,8 @@
   background-color: #faf8fc;
   margin: 30rpx auto;
   /* border-radius: 30rpx; */
-  border-top-left-radius: 30rpx;
-  border-bottom-left-radius: 30rpx;
+  /* border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx; */
   /* box-shadow: 0 0 3px #d8d8d8; */
   display: flex;
 }
@@ -105,5 +105,17 @@
   line-height: 260rpx;
   border-top-right-radius: 30rpx;
   border-bottom-right-radius: 30rpx;
+  font-size: 36rpx;
+}
+/* 移除 */
+.edi-sty{
+  background-color: #7868e6;
+  width: 145rpx;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 260rpx;
+  border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
   font-size: 36rpx;
 }

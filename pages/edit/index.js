@@ -1,4 +1,5 @@
 const app = getApp()
+const db = wx.cloud.database("cloud1");
 
 // pages/edit/index.js
 Page({
@@ -9,12 +10,15 @@ Page({
   data: {
     form:{
       title:'',
-      timePlanValue: 0,
-      targetValue: 0,
-      startValue: new Date(),
-      sText:'',
-      needWarn: false,
-      picture:'LookBook'
+      plan: 0,
+      day: 0,
+      start: new Date(),
+      text:'',
+      warn: false,
+      picture:'LookBook',
+      ownerId: app.globalData.openId,
+      complete: null,
+      punchDay: 0
     },
     show:false,
     planshow:false,
@@ -32,15 +36,41 @@ Page({
       { text: '健身', value: 'Sport' },
       { text: '吃蔬菜', value: 'Vegetable' },
     ],
-    showPicPath:'cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Icon/LookBook.svg'
+    showPicPath:'cloud://cloud1-8gvxy2jc8271232c.636c-cloud1-8gvxy2jc8271232c-1305351695/Icon/LookBook.svg',
+    selectId:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    var fakeForm = this.data.form;
+    fakeForm.ownerId = app.globalData.openId;
+    fakeForm.start = new Date();
+    //初始化
     this.setData({
       start:this.formatDate(new Date()),
+      form: fakeForm
+    })
+
+    //测试页面间传输信息
+    const eventChannel = this.getOpenerEventChannel()
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', (data) =>{
+      console.log(data)
+      db.collection('Habits').doc(data).get().then(res => {
+        console.log(res);
+        
+        this.setData({
+          selectId: data,
+          form: res.data,
+          start: this.formatDate(new Date(res.data.start)),
+          timePlanText:this.data.TimePlan[res.data.plan],
+          targetText: this.data.Target[res.data.day],
+          showPicPath: app.globalData.picRootPath + res.data.picture + '.svg'
+        })
+      })
     })
   },
 
@@ -64,34 +94,6 @@ Page({
   onHide: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   
   formatDate(date) {
     date = new Date(date);
@@ -106,7 +108,7 @@ Page({
 
   onStartConfirm(event){
     var fakeForm = this.data.form;
-    fakeForm.startValue = new Date(event.detail);
+    fakeForm.start = new Date(event.detail);
     this.setData({
       show: false,
       form: fakeForm,
@@ -122,7 +124,7 @@ Page({
 
   onPlanConfirm(event){
     var fakeForm = this.data.form;
-    fakeForm.timePlanValue = event.detail.index;
+    fakeForm.plan = event.detail.index;
     this.setData({
       planshow:false,
       form:fakeForm,
@@ -140,7 +142,7 @@ Page({
   
   onSTextChange(event){
     var fakeForm = this.data.form;
-    fakeForm.sText = event.detail;
+    fakeForm.text = event.detail;
     this.setData({
       form: fakeForm
     })
@@ -149,7 +151,7 @@ Page({
   onSwitchChange({ detail }) {
     // 需要手动对 checked 状态进行更新
     var fakeForm = this.data.form;
-    fakeForm.needWarn = detail;
+    fakeForm.warn = detail;
     this.setData({ form: fakeForm });
   },
 
@@ -159,7 +161,7 @@ Page({
 
   onTargetConfirm(event){
     var fakeForm = this.data.form;
-    fakeForm.targetValue = event.detail.index;
+    fakeForm.day = event.detail.index;
     this.setData({
       targetshow:false,
       form:fakeForm,
@@ -182,5 +184,49 @@ Page({
   },
   onPlanCancel(){
     this.setData({planshow:false});
+  },
+  onStartCancel(){
+    this.setData({show:false});
+  },
+
+  freshHabitCore(){
+    //console.log(this.data.form)
+    wx.showLoading({
+      title: '保存中',
+    })
+    //调用指定云函数
+    wx.cloud.callFunction({
+      name: 'createHabit',
+      data: {
+        habitId: this.data.selectId,
+        habitData: this.data.form
+      },
+      success: res => {
+        console.log(res)
+
+        wx.hideLoading({
+          success: (res) => {
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
+          },
+        })
+      },
+      fail: err => {
+        console.error('[云函数]调用失败', err)
+      }
+    })
+  },
+  
+  handlerCreate(){
+    if(this.data.form.title.trim() == ''){
+      wx.showToast({
+        title: '请填写完整',
+        icon: 'none'
+      })
+      return;
+    }
+
+    this.freshHabitCore();
   }
 })

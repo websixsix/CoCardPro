@@ -36,7 +36,7 @@ Component({
   methods: {
     onInput(event) {
       let form = this.data.form;
-      console.log(event.detail)
+      // console.log(event.detail)
       form.date = utils.checkDate(2,event.detail);
       this.setData({
         form
@@ -77,7 +77,7 @@ Component({
         icon: 'none'
       })
       else {
-        console.log("VC",this.data.form);
+        // console.log("VC",this.data.form);
         let monthArea = [];
         let monthDate = this.data.form.date.substr(0,10);
         for(let i = 0;i < Number(this.data.form.day);i++){
@@ -91,7 +91,7 @@ Component({
     handlerCancel(){
       let form = this.data.form;
       delete form.date;
-      console.log("FDGFDGFDG",form)
+      // console.log("FDGFDGFDG",form)
       for(let i in form) {
         form[i] = ""
       }
@@ -102,7 +102,7 @@ Component({
     initForm(){
       let form = this.data.form;
       delete form.date;
-      console.log("FDGFDGFDG",form)
+      // console.log("FDGFDGFDG",form)
       for(let i in form) {
         form[i] = ""
       }

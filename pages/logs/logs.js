@@ -1,6 +1,6 @@
 // logs.js
 const util = require('../../utils/util.js');
-const db = wx.cloud.database("cloud1");
+const db = wx.cloud.database()
 const todo = db.collection("taskList");
 const app = getApp()
 Page({
@@ -10,7 +10,9 @@ Page({
     finishNum: 0,
     longTime: 0,
     icon: '',
-    name: ''
+    name: '',
+    curContinueDay: 0,
+    maxContinueDay: 0
   },
   onLoad() {
     console.log("全局",app.globalData);
@@ -31,52 +33,64 @@ Page({
     //   }
     // })
   },
-    // 拉取 创建数据
-    fetchList(){
-      todo.get({
-        success: res => {
-          console.log("加载完成",res)
+  // 拉取 创建数据
+  fetchList(){
+    todo.get({
+      success: res => {
+        console.log("加载完成",res)
+        this.setData({
+          todoList: res.data
+        },res => {
+          wx.hideLoading()
+          console.log("count",this.pickOkHabit(this.data.todoList))
+          console.log("long", Math.max.apply(null, this.pickLongTime(this.data.todoList)))
           this.setData({
-            todoList: res.data
-          },res => {
-            wx.hideLoading()
-            console.log("count",this.pickOkHabit(this.data.todoList))
-            console.log("long", Math.max.apply(null, this.pickLongTime(this.data.todoList)))
-            this.setData({
-              finishNum: this.pickOkHabit(this.data.todoList),
-              longTime: Math.max.apply(null, this.pickLongTime(this.data.todoList))
-            })
+            finishNum: this.pickOkHabit(this.data.todoList),
+            longTime: Math.max.apply(null, this.pickLongTime(this.data.todoList))
           })
-        }
-      })
-    },
-    // 筛选完成习惯
-    pickOkHabit(arr){
-      let count = 0;
-      for(let i =0;i<arr.length;i++){
-         let flag = arr[i].monthArea.every(el => {
-            return el.isDo === true
-          });
-          if(flag) count++
-      }
-      return count
-    },
-    // 筛选最长完成的时间
-    pickLongTime(arr){
-      let pickArr = [];
-      for(let i = 0; i<arr.length;i++){
-        let cur = arr[i].monthArea.filter(e => {
-          return e.isDo === true
         })
-        console.log("匹配到的",cur)
-        pickArr[i] = cur.length
       }
-      return pickArr
-    },
-    // 跳转我的记录
-    handlerGo(){
-      wx.reLaunch({
-        url: '/pages/myHabit/myHabit',
-      })
+    })
+  },
+  // 筛选完成习惯
+  pickOkHabit(arr){
+    let count = 0;
+    for(let i =0;i<arr.length;i++){
+        let flag = arr[i].monthArea.every(el => {
+          return el.isDo === true
+        });
+        if(flag) count++
     }
+    return count
+  },
+  // 筛选最长完成的时间
+  pickLongTime(arr){
+    let pickArr = [];
+    for(let i = 0; i<arr.length;i++){
+      let cur = arr[i].monthArea.filter(e => {
+        return e.isDo === true
+      })
+      console.log("匹配到的",cur)
+      pickArr[i] = cur.length
+    }
+    return pickArr
+  },
+  // 跳转我的记录
+  handlerGo(){
+    wx.navigateTo({
+      url: '/pages/myHabit/myHabit',
+    })
+  },
+  onShow: function () {
+    db.collection('Users').where({
+      openId: 'ox7AJ5nqaA_lL9C7fW7zDLc9U5go' // 填入当前用户 openid
+    }).get().then(res => {
+      // console.log(res,app.globalData.openId)
+      this.setData({
+        curContinueDay:res.data.CurContinueDay,
+        maxContinueDay:res.data.MaxContinueDay
+      })
+    })
+    
+  },
 })

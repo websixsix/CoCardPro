@@ -1,6 +1,6 @@
 {
   "navigationBarBackgroundColor": "#5C0DAC",
-  "navigationBarTitleText": "编辑",
+  "navigationBarTitleText": "习惯信息",
   "usingComponents": {
      "van-button": "@vant/weapp/button/index",
      "van-datetime-picker": "@vant/weapp/datetime-picker/index",
