@@ -1,6 +1,6 @@
 /* pages/history/index.wxss */
 .calendar {
-  --calendar-height: 1000rpx;
+  --calendar-height: 650px;
   transition: all .3s;
 }
 .pull-down{
