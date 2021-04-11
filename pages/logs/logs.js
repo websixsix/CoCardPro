@@ -12,7 +12,9 @@ Page({
     icon: '',
     name: '',
     curContinueDay: 0,
-    maxContinueDay: 0
+    maxContinueDay: 0,
+    punchNumber: 0,
+    habitNumber: 0
   },
   onLoad() {
     console.log("全局",app.globalData);
@@ -83,14 +85,29 @@ Page({
   },
   onShow: function () {
     db.collection('Users').where({
-      openId: 'ox7AJ5nqaA_lL9C7fW7zDLc9U5go' // 填入当前用户 openid
+      openId: app.globalData.openId // 填入当前用户 openid
     }).get().then(res => {
       // console.log(res,app.globalData.openId)
       this.setData({
-        curContinueDay:res.data.CurContinueDay,
-        maxContinueDay:res.data.MaxContinueDay
+        curContinueDay:res.data[0].CurContinueDay,
+        maxContinueDay:res.data[0].MaxContinueDay
       })
     })
     
+    db.collection('Habits').where({
+      ownerId: app.globalData.openId
+    }).get().then(res => {
+      //console.log(res);
+      var habitNum = res.data.length;
+      var punchNum = 0;
+      for(var i = 0; i < res.data.length; i++){
+        punchNum += res.data[i].punchDay;
+      }
+
+      this.setData({
+        habitNumber: habitNum,
+        punchNumber: punchNum
+      })
+    })
   },
 })

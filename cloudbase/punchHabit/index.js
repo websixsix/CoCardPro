@@ -45,6 +45,10 @@ exports.main = async (event, context) => {
   var newData = getHabitInfo.data;
   delete newData._id;
 
+  const userInfo = await db.collection('Users').where({
+    openId:wxContext.OPENID
+  }).get();
+
   if(event.isCancelPunch){
     oprRecords = await db.collection('Records').doc(event.cancelId).remove();
     
@@ -53,6 +57,15 @@ exports.main = async (event, context) => {
     if(newData.complete){
       newData.complete = null
     }
+
+    await db.collection('Users').where({
+      openId:wxContext.OPENID
+    }).update({
+      data: {
+        CurContinueDay: _.inc(-1),
+        MaxContinueDay: _.max(userInfo.data[0].CurContinueDay)
+      }
+    })
   }
   else{
     oprRecords = await db.collection('Records').add({
@@ -68,6 +81,15 @@ exports.main = async (event, context) => {
     if(targetDay > 0 && newData.punchDay >= targetDay){
       newData.complete = new Date();
     }
+    
+    await db.collection('Users').where({
+      openId:wxContext.OPENID
+    }).update({
+      data: {
+        CurContinueDay: _.inc(1),
+        MaxContinueDay: _.max(userInfo.data[0].CurContinueDay + 1)
+      }
+    })
   }
   
   const editHabitInfo = await db.collection('Habits').doc(event.habitId).update({

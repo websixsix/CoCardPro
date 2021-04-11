@@ -8,8 +8,8 @@
             <image class="img-sty" src="{{todo.picName}}"></image>
             <view class="col-box">
               <text class="tit-int">{{todo.title}}</text>
-              <text class="tit-md">{{todo.msg}}</text>
-              <text class="tit-sm">打卡累计： {{todo.count}}次</text>
+              <text class="tit-md">{{todo.text}}</text>
+              <text class="tit-sm">打卡累计： {{todo.punchDay}}次</text>
             </view>
           </view>
         </view>
@@ -22,9 +22,9 @@
             <image class="img-sty" src="{{done.picName}}"></image>
             <view class="col-box">
               <text class="tit-int">{{done.title}}</text>
-              <text class="tit-md">{{done.msg}}</text>
-              <text class="tit-sm">打卡累计： {{done.count}}次</text>
-              <text class="tit-sm">完成日期： {{done.doneDate}}</text>
+              <text class="tit-md">{{done.text}}</text>
+              <text class="tit-sm">打卡累计： {{done.punchDay}}次</text>
+              <text class="tit-sm">完成日期： {{done.completeText}}</text>
             </view>
           </view>
         </view>

@@ -7,11 +7,11 @@
   </view>
   <view class="def-row">
     <view class="left-box">
-      <text class="box-text">{{12}}</text>
+      <text class="box-text">{{punchNumber}}</text>
       <text class="box-text">打卡次数</text>
     </view>
     <view class="right-box">
-      <text class="box-text">{{5}}</text>
+      <text class="box-text">{{habitNumber}}</text>
       <text class="box-text">已有习惯</text>
     </view>
   </view>
@@ -30,6 +30,6 @@
 </view>
 <!-- 我的习惯 -->
 <view bindtap="handlerGo" class="def-box" style="height: 150rpx; justify-content: center; text-items:center">
-  <view style="height: 150rpx; line-height:150rpx">我的习惯（{{5}}）</view>
+  <view style="height: 150rpx; line-height:150rpx">我的习惯（{{habitNumber}}）</view>
   <van-icon name="arrow" size='22px'/>
 </view>

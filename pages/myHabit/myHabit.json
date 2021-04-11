@@ -1,4 +1,6 @@
 {
+  "navigationBarBackgroundColor": "#5C0DAC",
+  "navigationBarTitleText": "我的习惯",
   "usingComponents": {
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index"
